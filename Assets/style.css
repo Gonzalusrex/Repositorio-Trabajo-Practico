@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "ibm plex sans", sans-serif;
+    
+}
+
+html, body{
+    height: 100%;
+}
+body{
+    background:linear-gradient(to bottom, #5FB0B7,#A14EBF);
+
+}
+/* Estilos para el Login  */
+.body__login{
+display: flex;
+flex-direction: column;
+}
+.login__header{
+    display: flex;
+    height: 15vh;
+}
+
+.login__header-container{
+    margin: auto;
+}
+.login__icon{
+    height: 12vh;
+}
+
+.login__content{
+    width: 60vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 800px;
+    margin-top: 15vh;
+}
+
+.form-control{
+    opacity: 0.9;
+    background-color: whitesmoke;
+    font-size: 1.3rem;
+    box-shadow: 0px 5px 5px 7px #2227;
+}
+
+.form-control:hover{
+    outline: 2px solid white;
+}
+.btn{
+    margin-top: 10px;
+    box-shadow: 0px 0px 5px 5px #2227;
+    background-color:#5FB0B7 ;
+}
+
+.btn:hover{
+    outline: 2px solid white;
+    background-color: #5FB0B7 ;
+    opacity: 0.7;
+}
+
+.crear__cuenta{
+    font-size: 1.3rem;
+
+}
+.crear__cuenta:hover{
+    color:#A14EBF;
+}
+
+.footer__login{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+
+}
+
+/* Estilos para Menu Principal */
+
+.menu__titulo{
+    font-weight: 900;
+    font-size: 4rem;
+}
+
