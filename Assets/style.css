@@ -13,6 +13,21 @@ body{
     background:linear-gradient(to bottom, #5FB0B7,#A14EBF);
 
 }
+
+
+
+.vistas__header{
+    display: flex;
+    height: 15vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo{
+    max-height: 80%;
+}
 /* Estilos para el Login  */
 .body__login{
 display: flex;
@@ -232,4 +247,177 @@ flex-direction: column;
     justify-self: center;
     }
 
+}
+
+
+
+/* Estilos para historial */    
+
+.historial__titulo{
+    color: white;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+.transactionsTable{
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    border-collapse: collapse;
+    box-shadow: 0px 2px 9px #0007;
+    max-width: 1000px;
+    background: linear-gradient(to bottom, #e1e5e580, #0d0d0d11);
+    font-size: large;
+    padding: 15px;
+    outline: white solid 2px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.transactionsTable td{
+    padding: 10px;
+    text-align: center;
+    outline: white solid 1px;
+}
+
+ /* ----Estilos para Deposito ---- */
+
+.deposito__body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-content: space-between;
+}
+
+
+.deposito__main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70vh;
+    width: 100%;
+    margin: auto;
+}
+
+.deposito__input{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    width: 60vw;
+    max-width: 500px;
+}
+
+
+
+
+.balance__deposito{
+    margin: auto;
+    height: 15vh;
+    width: 40vw;
+    background-color: rgba(196, 229, 238, 0.938);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+}
+
+.footer__deposito{
+    display: flex;
+    align-items: end;
+    width: 90vw;
+    justify-content: space-between;
+}
+
+/* estilos para transferencias  */
+
+.send__titulo{
+    color: white;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.send_body{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 40vh;
+
+}
+
+.send__main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 70vh;
+    width: 100%;
+    margin: auto;
+    gap: 15px;
+}
+
+.balance__send{
+    margin: auto;
+    height: 15vh;
+    width: 40vw;    
+    background-color: rgba(196, 229, 238, 0.938);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+}
+
+.form__send{
+    width: 40vw;
+    max-width: 500px;
+}
+
+.botonsend{
+    width: 300px;
+    height: 50px;
+}
+
+/* Estilos para Contactos  */
+
+
+.contactos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    height: 80vh;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+
+}
+
+.contactos__input{
+    width: 90%;
+    max-width: 1500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addcontacto{
+    margin-left: 10px;
+    width: 100px;
+    align-self: auto;
+}
+
+.contactos h1{
+    color: white;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.eliminarcontacto{
+    width: 80%;
+    height: 100%;
 }

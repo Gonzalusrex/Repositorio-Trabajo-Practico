@@ -10,26 +10,35 @@
     <script src="../Assets/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="../Assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
-<body>
-    <header>
-        <a href="menu.html" class="volver-menu"><button><img src="../images/backarrow.png" alt=""></button></a>
-    </header
-    <main class="menu__sendmoney">
-        <section class="sendmoney__contacto">
-            <label for="site-search">Search the site:</label>
-            <input type="search" id="site-search" name="q" />
-            <button>Search</button>
+<body class="send_body">
+    <header class="vistas__header">
+        <section class="gobackincon">
+        <a href="menu.html" "><button class="btn btn-primary loginbtn volver-menu"><img src="../images/backarrow.png" alt="">Menu</button></a>
         </section>
-        <section class="lista__contactos">
-            <ul>
-                <li class="contacto">pepito</li>
-            </ul>
+        <section>
+        <img src="/images/LOGO ALKEMY AZUL CON NEGRO.webp" alt="Logotipo de Alkewallet" class="logo" />
         </section>
+    </header>
+    <main class="send__main">
+        <h1 class="send__titulo">Transferir</h1>
+        <section class="balance balance__send">
+            <p>Saldo: <span class="balance-actual">$0</span></p>
+        </section>
+        <select id="destinatario" class="btn btn-primary loginbtn botonsend"></select>
+
+        <input type="number" id="monto-transferencia" class="form-control form__send" placeholder="Monto">
+
+        <button id="transferBtn" class="btn btn-primary loginbtn botonsend">Transferir</button>
+
     </main>
+
+    <script src="../Assets/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="../Assets/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="../Assets/style.css"><meta charset="UTF-8">
+    <link rel="stylesheet" href="../Assets/style.css">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlkaWallet/Deposito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,27 +17,42 @@
     <script src="../Assets/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="../Assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
-<body>
-    <header>
-        <a href="menu.html" class="volver-menu"><button><img src="../images/backarrow.png" alt=""></button></a>
-    </header
-    <section>
-        <h1>Saldo</h1>
-        <h2><p>Saldo actual: <span class="balance-actual">$0</span></p></h2>
-        <p>hola hola hola</p>
+
+<body class="deposito__body">
+    <header class="vistas__header">
+        <section class="gobackincon">
+        <a href="menu.html" "><button class="btn btn-primary loginbtn volver-menu"><img src="../images/backarrow.png" alt="">Menu</button></a>
+        </section>
+        <section>
+        <img src="/images/LOGO ALKEMY AZUL CON NEGRO.webp" alt="Logotipo de Alkewallet" class="logo" />
+        </section>
+    </header>
+    <main deposito__main>
+    
+    <section class="balance__deposito">
+            <h2>Saldo disponible</h2>
+            <p> 
+                <span class="balance-actual">$0</span>
+            </p>
     </section>
 
-    <input type="number" id="montodeposito" placeholder="Monto a depositar">
-<button id="depositBtn">Depositar</button>
+    
+    <section class="deposito__input">
+    <input type="number" class="form-control" id="montodeposito" placeholder="Monto a depositar">
+    <button id="depositBtn"class="btn btn-primary loginbtn"  >Depositar</button>
+    </section> 
+    </main> 
 
-<p>Saldo actual: <span class="balance-actual">$0</span></p>
-
-<script src="../Assets/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    </footer> 
+    <script src="../Assets/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>    
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
