@@ -1,17 +1,33 @@
-function addTransaction(transaction) {
-    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    transactions.push(transaction);
+
+// Funciones generales para transacciones
+
+
+function getTransactions() {
+    return JSON.parse(localStorage.getItem("transactions")) || [];
+}
+
+function saveTransactions(transactions) {
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
+
+function addTransaction(transaction) {
+    const transactions = getTransactions();
+    transactions.push(transaction);
+    saveTransactions(transactions);
+
+    // Si estamos en la página de historial  se actualiza inmediatamente
+    renderTransactions();
+}
+
+
+
+// Manejo de usuarios y login
 
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
+const loginbtn = document.getElementById("loginbtn");
 
-// Scripts para Login //
-const loginbtn = document.getElementById("loginbtn"); // esto permite que el boton con clase loginbtn pueda ser utilizado 
-
-// Se aniade el evento click al boton loginbtn, lee los campos en los input con clase loginuser y login pass. luego verifica que alguno de estos no este vacio !user, !pass.  Luego de validar redirige a la vista de menu.html //
 if (loginbtn) {
     loginbtn.addEventListener("click", () => {
         const user = document.getElementById("loginUser").value.trim().toLowerCase();
@@ -22,9 +38,7 @@ if (loginbtn) {
             return;
         }
 
-        const validUser = users.find(
-            u => u.user === user && u.pass === pass
-        );
+        const validUser = users.find(u => u.user === user && u.pass === pass);
 
         if (!validUser) {
             alert("Usuario o contraseña incorrectos");
@@ -38,13 +52,10 @@ if (loginbtn) {
 
 
 
-
-//Secion de Scripts para la creacion de usuarios
+// Registro de usuarios
 
 
 const registerBtn = document.getElementById("registerBtn");
-
-//si existe el boton de registro aniade el evento click para escribir los nuevos usuarios//
 
 if (registerBtn) {
     registerBtn.addEventListener("click", () => {
@@ -80,66 +91,59 @@ function isValidEmail(email) {
 }
 
 
+// Manejo del saldo
 
-
-
-
-
-
-
-// Seccion de Scripts para el manejo del saldo en diferentes vistas //
 
 let balance = Number(localStorage.getItem("balance")) || 0;
 
-
 function saveBalance() {
-    localStorage.setItem("balance", balance);
+    localStorage.setItem("balance", balance.toString());
 }
 
 function renderBalance() {
-    const balanceElements = document.querySelectorAll(".balance-actual");
-
-    balanceElements.forEach(el => {
-        el.textContent = `$${balance}`;
+    document.querySelectorAll(".balance-actual").forEach(el => {
+        el.textContent = `$${balance.toFixed(2)}`;
     });
 }
+
+
+// Depósitos
 
 
 const depositBtn = document.getElementById("depositBtn");
 const montodeposito = document.getElementById("montodeposito");
 
-if (depositBtn) {
+if (depositBtn && montodeposito) {
     depositBtn.addEventListener("click", () => {
         const monto = Number(montodeposito.value);
 
-        if (monto <= 0 || isNaN(monto)) {
-            alert("Ingrese un monto válido");
+        if (isNaN(monto) || monto <= 0) {
+            alert("Ingrese un monto válido mayor a 0");
             return;
         }
-
-
-
-
-
 
         balance += monto;
         saveBalance();
         renderBalance();
 
+        addTransaction({
+            type: "deposit",
+            amount: monto,
+            date: new Date().toLocaleString("es-CL")
+        });
+
         montodeposito.value = "";
+        alert("Depósito realizado con éxito");
     });
 }
 
+renderBalance(); 
 
-renderBalance();
 
+// Contactos
 
-//Seccion de scripts para vista de Contactos//
 
 let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
-
-
-//Obtener elementos del DOM//
 
 const addBtn = document.getElementById("addContact");
 const nameInput = document.getElementById("contactName");
@@ -147,11 +151,8 @@ const apellidoInput = document.getElementById("contactLastName");
 const bankInput = document.getElementById("contactBank");
 const table = document.getElementById("contactTable");
 
-
-
-// Muestra los contactos Existentes //
-
 function renderContactos() {
+    if (!table) return;
     table.innerHTML = "";
 
     contactos.forEach((contact, index) => {
@@ -161,51 +162,41 @@ function renderContactos() {
                 <td>${contact.apellido}</td>
                 <td>${contact.banco}</td>
                 <td>
-                <button class="btn btn-danger btn-sm form-control eliminarcontacto"
-                        onclick="deleteContact(${index})">
+                    <button class="btn btn-danger btn-sm eliminarcontacto"
+                            onclick="deleteContact(${index})">
                         Eliminar
                     </button>
-                </td>   
-            </tr>        
+                </td>
+            </tr>
         `;
     });
 }
 
 function deleteContact(index) {
     contactos.splice(index, 1);
-    saveContactos();
+    localStorage.setItem("contactos", JSON.stringify(contactos));
     renderContactos();
 }
 
-function saveContactos() {
-    localStorage.setItem("contactos", JSON.stringify(contactos));
-}
-
-// Agregar contactos y valida que se llenen los campos//
 if (addBtn) {
     addBtn.addEventListener("click", () => {
-        const nombre = nameInput.value.trim();
+        const nombre   = nameInput.value.trim();
         const apellido = apellidoInput.value.trim();
-        const banco = bankInput.value.trim();
+        const banco    = bankInput.value.trim();
 
-        if (nombre === "" || apellido === "" || banco === "") {
+        if (!nombre || !apellido || !banco) {
             alert("Complete todos los campos");
             return;
         }
 
-
-        // Validar si ya existe el contacto//
-
-        const exists = contactos.some(
-            contact => contact.nombre === nombre
-        );
-
+        const exists = contactos.some(c => c.nombre === nombre && c.apellido === apellido);
         if (exists) {
-            return alert("El contacto ya existe");
+            alert("Este contacto ya existe");
+            return;
         }
 
         contactos.push({ nombre, apellido, banco });
-        saveContactos();
+        localStorage.setItem("contactos", JSON.stringify(contactos));
         renderContactos();
 
         nameInput.value = "";
@@ -214,20 +205,19 @@ if (addBtn) {
     });
 }
 
-// linea para mostrar el array de contactos en la vista //
 if (table) {
     renderContactos();
 }
 
 
 
-//---- Transferencias -----//
+// Transferencias
+
 
 const destinatario = document.getElementById("destinatario");
 
 if (destinatario) {
     const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
-
     destinatario.innerHTML = `<option value="">Seleccione contacto</option>`;
 
     contactos.forEach((c, index) => {
@@ -239,18 +229,17 @@ if (destinatario) {
     });
 }
 
-
 const transferBtn = document.getElementById("transferBtn");
 const amountInput = document.getElementById("monto-transferencia");
 
-if (transferBtn) {
+if (transferBtn && amountInput) {
     transferBtn.addEventListener("click", () => {
         const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
         const selectedIndex = destinatario.value;
         const amount = Number(amountInput.value);
 
-        if (selectedIndex === "" || amount <= 0) {
-            alert("Seleccione contacto y monto válido");
+        if (selectedIndex === "" || isNaN(amount) || amount <= 0) {
+            alert("Seleccione un contacto y un monto válido");
             return;
         }
 
@@ -261,58 +250,59 @@ if (transferBtn) {
 
         const contact = contactos[selectedIndex];
 
-        // ---Descontar saldo---//
         balance -= amount;
         saveBalance();
         renderBalance();
 
-        //-- Guardar transacción --//
-        transactions.push({
+        addTransaction({
             type: "transfer",
             to: `${contact.nombre} ${contact.apellido}`,
             bank: contact.banco,
-            amount,
-            date: new Date().toLocaleString()
+            amount: amount,
+            date: new Date().toLocaleString("es-CL")
         });
-
-        localStorage.setItem("transactions", JSON.stringify(transactions));
 
         alert("Transferencia realizada con éxito");
         amountInput.value = "";
     });
 }
 
-//--- Scripts para la vista de Historial de transacciones ---//
 
+// Historial de transacciones
 
-
-
-
-
-
-// --- Historial de transacciones ---
 
 function renderTransactions() {
     const transactionsTable = document.getElementById("transactionsTable");
     if (!transactionsTable) return;
 
-    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    const transactions = getTransactions();
 
     transactionsTable.innerHTML = "";
 
     transactions.forEach(t => {
+        const isDeposit = t.type === "deposit";
         transactionsTable.innerHTML += `
             <tr>
-                <td>${t.type === "deposit" ? "Cuenta propia" : t.to}</td>
-                <td>${t.type === "deposit" ? "-" : t.bank}</td>
-                <td style="color:${t.type === "deposit" ? "green" : "red"}">
-                    ${t.type === "deposit" ? "+" : "-"}$${t.amount}
+                <td>${isDeposit ? "Depósito" : t.to}</td>
+                <td>${isDeposit ? "—" : t.bank}</td>
+                <td style="color: ${isDeposit ? "green" : "red"}; font-weight: bold;">
+                    ${isDeposit ? "+" : "-"}$${t.amount.toFixed(2)}
                 </td>
                 <td>${t.date}</td>
             </tr>
         `;
     });
+
+    // Si no hay transacciones
+    if (transactions.length === 0) {
+        transactionsTable.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align:center; color:#888;">
+                    Aún no hay transacciones registradas
+                </td>
+            </tr>
+        `;
+    }
 }
 
-// Render inicial al cargar la vista
 renderTransactions();

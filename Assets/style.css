@@ -282,6 +282,13 @@ flex-direction: column;
 
  /* ----Estilos para Deposito ---- */
 
+.deposito__titulo{
+    color: white;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
 .deposito__body{
     display: flex;
     flex-direction: column;
@@ -325,6 +332,9 @@ flex-direction: column;
     max-width: 1000px;
 }
 
+.balance__deposito:hover{
+    background-color: white;    
+}
 .footer__deposito{
     display: flex;
     align-items: end;
