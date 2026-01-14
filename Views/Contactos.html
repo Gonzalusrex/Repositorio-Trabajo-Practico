@@ -11,23 +11,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="icon" href="../images/wallet.png">
 </head>
 
+
 <body>
-    <header>
-        <a href="menu.html" class="volver-menu"><button><img src="../images/backarrow.png" alt=""></button></a>
+    <header class="vistas__header">
+        <section class="gobackincon">
+        <a href="menu.html" "><button class="btn btn-primary loginbtn volver-menu"><img src="../images/backarrow.png" alt="">Menu</button></a>
+        </section>
+        <section>
+        <img src="/images/LOGO ALKEMY AZUL CON NEGRO.webp" alt="Logotipo de Alkewallet" class="logo" />
+        </section>
     </header>
     <section class="contactos">
         <h1>Contactos</h1>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 contactos__input">
             <input type="text" id="contactName" class="form-control" placeholder="Nombre">
-            <input type="text" id="contactLastName" placeholder="Apellido">
+            <input type="text" id="contactLastName" placeholder="Apellido" class="form-control">
             <input type="text" id="contactBank" class="form-control" placeholder="Banco">
-            <button class="btn btn-primary" id="addContact">Agregar</button>
+            <button class="btn btn-primary form-control addcontacto" id="addContact">Agregar</button>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped transactionsTable">
             <thead>
                 <tr>
                     <th>Nombre</th>
